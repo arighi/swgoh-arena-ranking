@@ -12,6 +12,8 @@ import config
 from datetime import datetime, date
 from collections import OrderedDict
 
+copyright_info = "Bot designed by: Andrea Righi (https://github.com/arighi/swgoh-arena-ranking)"
+
 client = discord.Client()
 
 SAVE_FILE = 'players.dat'
@@ -34,8 +36,8 @@ Examples:
     - show bot invitation link (use the link to invite this bot to your Discord server):
     $invite
 
-Bot designed by: Andrea Righi (https://github.com/arighi/swgoh-arena-ranking)
-"""
+{0}
+""".format(copyright_info)
 
 def exception_hook(exc_type, exc_value, exc_traceback):
     logging.error(format_exception(exc_type, exc_value, exc_traceback))
@@ -170,6 +172,7 @@ async def on_message(message):
             logging.info('group = ' + group_name)
             msg += show_group(channel_id, group_name)
             msg += "\n-\n"
+        msg += copyright_info + "\n"
         logging.info("sending: " + msg)
 
         em = discord.Embed(title=">>> TODAY'S RANKING: %s <<<" % now,
